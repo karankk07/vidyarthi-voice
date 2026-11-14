@@ -67,3 +67,12 @@ Check before launch: hostel names (NH / OH / WH), whether a Gym Rep post exists,
 - [ ] Custom SMTP working: send yourself a code.
 - [ ] Seed issues visible after sign-in.
 - [ ] Rules page reviewed by a senior or the Student Affairs office.
+
+## Contributing
+Contributions from IIM Calcutta students are welcome.
+1. Fork the repo and run it locally in demo mode (`npm install`, then `npm run dev`). No keys needed.
+2. Keep changes small and focused. Run `npm run build` before opening a pull request.
+3. Open a pull request describing what changed and why.
+
+Database changes go in `supabase/schema.sql` and must keep the security rules intact: IIMC-only access, no author ids in read views, and responder checks on updates.
+Never commit secrets. The values in `.env.production` are public by design; the Supabase service key, SMTP keys and passwords must never appear in this repo.
