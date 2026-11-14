@@ -1,6 +1,6 @@
 import { api } from "../lib/api";
 import { isClosed, pct } from "../lib/util";
-import { IssueCard, Skeletons } from "../components";
+import { IssueCard, LockedTeaser, Skeletons } from "../components";
 import { useApp } from "../store";
 
 export default function Home() {
@@ -39,7 +39,7 @@ export default function Home() {
       </section>
 
       <div className="wrap">
-        {!locked && (
+        {locked ? <div style={{ marginTop: -32, position: "relative" }}><LockedTeaser next="/board" /></div> : (
           <div className="stats">
             <div className="card stat"><b>{issues.length}</b><span>Issues raised</span></div>
             <div className="card stat"><b>{supports}</b><span>Supports given</span></div>
@@ -74,6 +74,7 @@ export default function Home() {
           </div>
         </section>
 
+        {!locked && (
         <section className="section" style={{ paddingTop: 0 }}>
           <div className="section-head">
             <div className="stack" style={{ ["--gap" as string]: "8px" }}>
@@ -83,18 +84,11 @@ export default function Home() {
             <div className="spacer" />
             <a className="link" href="#/board">View all →</a>
           </div>
-          {locked ? (
-            <div className="card pad row wrap-row">
-              <div style={{ flex: 1, minWidth: 220 }}>
-                <h3>The board is for the IIMC community only</h3>
-                <p className="muted" style={{ marginTop: 6 }}>Sign in with your IIM Calcutta email to see and support issues.</p>
-              </div>
-              <a className="btn btn-dark" href="#/login?next=%2Fboard">Sign in</a>
-            </div>
-          ) : loading ? <Skeletons n={3} /> : (
+          {loading ? <Skeletons n={3} /> : (
             <div className="list">{top.map((i) => <IssueCard key={i.id} issue={i} />)}</div>
           )}
         </section>
+        )}
 
         <section className="section" style={{ paddingTop: 0 }}>
           <div className="section-head">

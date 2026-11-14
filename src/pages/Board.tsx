@@ -1,7 +1,7 @@
 import { useMemo, useState } from "react";
 import { api } from "../lib/api";
 import { BODIES, CATEGORIES, bodyName, isClosed, isOverdue, trendScore } from "../lib/util";
-import { Empty, IssueCard, SignInWall, Skeletons } from "../components";
+import { Empty, IssueCard, LockedTeaser, Skeletons } from "../components";
 import { queryParam, useApp } from "../store";
 
 type Sort = "top" | "trending" | "new" | "updated";
@@ -50,7 +50,7 @@ export default function Board() {
         <a className="btn btn-primary" href="#/raise">+ Raise an issue</a>
       </div>
 
-      {locked ? <div style={{ marginTop: 20 }}><SignInWall next="/board" /></div> : (
+      {locked ? <div style={{ marginTop: 20 }}><LockedTeaser next="/board" /></div> : (
         <>
           <div className="toolbar">
             <div className="search">
