@@ -52,11 +52,10 @@ export function makeSupabaseApi(url: string, key: string): Api {
         sb.from("body_members").select("body_id").eq("email", email),
         sb.from("moderators").select("email").eq("email", email),
       ]);
-      return {
-        email,
-        responderFor: (members.data || []).map((m: Row) => m.body_id),
-        isModerator: (mods.data || []).length > 0,
-      };
+      const isModerator = (mods.data || []).length > 0;
+      const bodies = (members.data || []).map((m: Row) => m.body_id);
+      // Moderators can respond for any body (the database allows it too).
+      return { email, responderFor: isModerator ? ["*", ...bodies] : bodies, isModerator };
     },
     onAuthChange(cb) {
       const { data } = sb.auth.onAuthStateChange(() => cb());

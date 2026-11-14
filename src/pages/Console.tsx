@@ -100,7 +100,7 @@ export default function Console() {
         <select className="select" value={body} onChange={(e) => { setBody(e.target.value); setOpen(null); }} aria-label="Responding for">
           {mine.map((b) => <option key={b} value={b}>{bodyName(b)}</option>)}
         </select>
-        {all && <span className="faint">Demo: you can act as any body.</span>}
+        {all && <span className="faint">{api.mode === "demo" ? "Demo" : "Moderator"}: you can act as any body.</span>}
       </div>
 
       <div className="seg" role="group" style={{ marginBottom: 14 }}>
