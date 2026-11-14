@@ -33,7 +33,7 @@ function Header({ path }: { path: string }) {
             <button className="btn btn-ghost btn-sm" onClick={() => api.signOut().then(() => go("/"))}>Sign out</button>
           </>
         ) : (
-          <a className="btn btn-ghost btn-sm" href={`#/login?next=${encodeURIComponent(path)}`}>Sign in</a>
+          <a className="btn btn-ghost btn-sm" href={`#/login?next=${encodeURIComponent(path === "/login" ? "/board" : path)}`}>Sign in</a>
         )}
       </div>
     </header>

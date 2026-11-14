@@ -51,7 +51,7 @@ export default function Login() {
           <form className="stack" onSubmit={send} noValidate>
             <div>
               <h2>Sign in</h2>
-              <p className="muted" style={{ marginTop: 6 }}>Only for the IIM Calcutta community. We will email you a 6-digit code. No password needed.</p>
+              <p className="muted" style={{ marginTop: 6 }}>Only for the IIM Calcutta community. We will email you a one-time code. No password needed.</p>
             </div>
             <div className="field">
               <label htmlFor="em">IIMC email</label>
@@ -66,11 +66,11 @@ export default function Login() {
           <form className="stack" onSubmit={verify} noValidate>
             <div>
               <h2>Check your inbox</h2>
-              <p className="muted" style={{ marginTop: 6 }}>We sent a 6-digit code to <b>{email}</b>.{api.mode === "demo" && " In this demo, the code is 123456."}</p>
+              <p className="muted" style={{ marginTop: 6 }}>We sent a sign-in code to <b>{email}</b>.{api.mode === "demo" && " In this demo, the code is 123456."}</p>
             </div>
             <div className="field">
               <label htmlFor="code">Code</label>
-              <input id="code" className="input code-input" inputMode="numeric" autoComplete="one-time-code" autoFocus maxLength={6}
+              <input id="code" className="input code-input" inputMode="numeric" autoComplete="one-time-code" autoFocus maxLength={10}
                 value={code} onChange={(e) => setCode(e.target.value.replace(/\D/g, ""))} />
             </div>
             {err && <div className="error">{err}</div>}
